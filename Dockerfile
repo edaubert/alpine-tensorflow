@@ -47,7 +47,7 @@ RUN cd bazel-${BAZEL_VERSION} \
     && cp -p output/bazel /usr/bin/
 
 # Download Tensorflow
-ENV TENSORFLOW_VERSION 1.7.0
+ENV TENSORFLOW_VERSION 1.8.0
 RUN cd /tmp \
     && curl -SL https://github.com/tensorflow/tensorflow/archive/v${TENSORFLOW_VERSION}.tar.gz \
         | tar xzf -
@@ -58,7 +58,7 @@ RUN cd /tmp/tensorflow-${TENSORFLOW_VERSION} \
     && sed -i -e '/JEMALLOC_HAVE_SECURE_GETENV/d' third_party/jemalloc.BUILD \
     && sed -i -e '/define TF_GENERATE_BACKTRACE/d' tensorflow/core/platform/default/stacktrace.h \
     && sed -i -e '/define TF_GENERATE_STACKTRACE/d' tensorflow/core/platform/stacktrace_handler.cc \
-    && PYTHON_BIN_PATH=/usr/bin/python \
+    && PYTHON_BIN_PATH=/usr/bin/python3 \
         PYTHON_LIB_PATH=/usr/lib/python3.6/site-packages \
         CC_OPT_FLAGS="-march=native" \
         TF_NEED_JEMALLOC=1 \
